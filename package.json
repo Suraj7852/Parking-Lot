@@ -1,0 +1,28 @@
+{
+  "name": "parkinglotproblem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suraj7852/Parking-Lot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Suraj7852/Parking-Lot/issues"
+  },
+  "homepage": "https://github.com/Suraj7852/Parking-Lot#readme",
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "nyc": "^15.0.0"
+  }
+}
