@@ -1,4 +1,4 @@
-let ownerParking = require('./OwnerParking');
+let observer = require('./Observer');
 
 class ParkingLot {
     capacity;
@@ -26,7 +26,7 @@ class ParkingLot {
 
     isFull() {
         if (this.cars.length >= this.capacity) {
-            ownerParking.isFull(true);
+            observer.notifyAll();
             return true;
         }
         return false;
