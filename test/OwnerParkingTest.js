@@ -11,4 +11,9 @@ describe('Lot is full', () => {
         let parkingOwner = ownerParking.isFull(full);
         assert.isTrue(parkingOwner)
     });
+
+    it('should return true if lot is full and someOne unPark', function () {
+        let parkingOwner = ownerParking.notifyOwner(true);
+        assert.isTrue(parkingOwner);
+    });
 });

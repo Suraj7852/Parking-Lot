@@ -1,4 +1,5 @@
 let observer = require('./Observer');
+let ownerParking = require('./OwnerParking');
 
 class ParkingLot {
     capacity;
@@ -22,7 +23,7 @@ class ParkingLot {
     unPark() {
         if (this.isFull()) {
             this.cars.pop();
-            return observer.notifyAll();
+            return ownerParking.notifyOwner(true);
         }
         if (this.cars.length > 0) {
             this.cars.pop();

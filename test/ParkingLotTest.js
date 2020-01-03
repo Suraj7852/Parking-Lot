@@ -37,6 +37,14 @@ describe('unPark the car', () => {
         let unPark = parkingLot.unPark();
         assert.isTrue(unPark);
     });
+
+    it('should return true if lot is full', function () {
+        let parkingLot = new ParkingLot(2);
+        parkingLot.park({});
+        parkingLot.park({});
+        let full = parkingLot.unPark();
+        assert.isTrue(full);
+    });
 });
 
 describe('full parking lot', () => {
