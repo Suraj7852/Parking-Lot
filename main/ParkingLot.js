@@ -1,12 +1,15 @@
+let ownerParking = require('./OwnerParking');
+
 class ParkingLot {
     capacity;
     cars = [];
+
     constructor(capacity) {
         this.capacity = capacity;
     }
 
     park(car) {
-        if (!this.isFull()){
+        if (!this.isFull()) {
             this.cars.push(car);
             return true;
         }
@@ -14,7 +17,7 @@ class ParkingLot {
     }
 
     unPark() {
-        if (this.cars.length>0){
+        if (this.cars.length > 0) {
             this.cars.pop();
             return true;
         }
@@ -22,7 +25,12 @@ class ParkingLot {
     }
 
     isFull() {
-        return this.cars.length >= this.capacity;
+        if (this.cars.length >= this.capacity) {
+            ownerParking.isFull(true);
+            return true;
+        }
+        return false;
     }
 }
+
 module.exports = ParkingLot;
