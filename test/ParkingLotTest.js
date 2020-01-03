@@ -56,3 +56,21 @@ describe('full parking lot', () => {
         assert.isTrue(unPark);
     });
 });
+
+describe('given slots: ', () => {
+    let parkingLot = new ParkingLot(5);
+    it('should return list of slots available', () => {
+        parkingLot.park({name: "suraj",car: "1234"});
+        parkingLot.park({name: "ravi",car: "1235"});
+        let allocatedSpace = parkingLot.allocatedSpace();
+        assert.isArray(allocatedSpace)
+    });
+
+    it('should return list of empty slots available', () => {
+        parkingLot.unAllocatedSpace();
+    });
+
+    it('should park the car where to park', function () {
+        parkingLot.parkAtSpecificPlace({name: "vishal", car: "5689"},4);
+    });
+});
