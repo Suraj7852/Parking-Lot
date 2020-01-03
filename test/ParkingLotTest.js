@@ -29,6 +29,14 @@ describe('unPark the car', () => {
         let unPark = parkingLot.unPark();
         assert.isFalse(unPark);
     });
+
+    it('should return false if there is no car', () => {
+        let parkingLot = new ParkingLot(2);
+        parkingLot.park({});
+        parkingLot.park({});
+        let unPark = parkingLot.unPark();
+        assert.isTrue(unPark);
+    });
 });
 
 describe('full parking lot', () => {

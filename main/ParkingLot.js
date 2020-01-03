@@ -13,10 +13,17 @@ class ParkingLot {
             this.cars.push(car);
             return true;
         }
-        return false;
+        if (this.isFull()){
+            observer.notifyAll();
+            return false;
+        }
     }
 
     unPark() {
+        if (this.isFull()) {
+            this.cars.pop();
+            return observer.notifyAll();
+        }
         if (this.cars.length > 0) {
             this.cars.pop();
             return true;
@@ -25,11 +32,7 @@ class ParkingLot {
     }
 
     isFull() {
-        if (this.cars.length >= this.capacity) {
-            observer.notifyAll();
-            return true;
-        }
-        return false;
+        return this.cars.length >= this.capacity;
     }
 }
 
