@@ -39,29 +39,33 @@ class ParkingLot {
     allocatedSpace() {
         let object = {
             name: null,
-            type: null
+            car: null
         };
         for (let i = 0; i < this.capacity; i++) {
             if (this.cars[i] === undefined)
                 this.cars.push(object);
-            console.log(`element in ${i} are ${this.cars[i].name}`)
         }
         return this.cars;
     }
 
     unAllocatedSpace() {
         for (let i = 0; i < this.capacity; i++) {
-            if (this.cars[i].type === null)
+            if (this.cars[i].car === null)
                 console.log("Empty slots: " + i);
         }
     }
 
     parkAtSpecificPlace(car, slot) {
-        if (this.cars[slot].type === null){
+        if (this.cars[slot].car === null) {
             this.cars[slot] = car;
             return true;
         }
         return false;
+    }
+
+    findCar(type) {
+        let searchSlot = this.cars.find(o => o.car == type );
+        return this.cars.indexOf(searchSlot);
     }
 }
 

@@ -80,3 +80,21 @@ describe('given slots: ', () => {
         assert.isFalse(specificPlace);
     });
 });
+
+describe('find car', () => {
+    let parkingLot = new ParkingLot(5);
+    it('should should able to find slot where owner car is parked', function () {
+        parkingLot.park({name: "suraj",car: "1234"});
+        parkingLot.park({name: "ravi",car: "1238"});
+        parkingLot.park({name: "romil",car: "1231"});
+        parkingLot.park({name: "raju",car: "1255"});
+        parkingLot.allocatedSpace();
+        let allocatedSpace = parkingLot.findCar(1238);
+        assert.equal(allocatedSpace, 1);
+    });
+
+    it('should return false if there is no such car', function () {
+        let allocatedSpace = parkingLot.findCar(5545);
+        assert.equal(allocatedSpace, -1);
+    });
+});
