@@ -60,6 +60,11 @@ describe('given slots: ', () => {
         let allocatedSpace = parkingLot.allocatedSpace();
         assert.isArray(allocatedSpace)
     });
+
+    it('should show the empty slots available', function () {
+        let allocatedSpace = parkingLot.unAllocatedSpace();
+        assert.equal(allocatedSpace,true);
+    });
 });
 
 describe('find car', () => {

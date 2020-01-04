@@ -74,6 +74,7 @@ class ParkingLot {
             if (this.cars[i].car === null)
                 console.log("Empty slots: " + i);
         }
+        return true;
     }
 
     findCar(carNo) {
