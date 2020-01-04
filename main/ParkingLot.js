@@ -7,11 +7,12 @@ class ParkingLot {
 
     constructor(capacity) {
         this.capacity = capacity;
+        this.allocatedSpace();
     }
 
-    park(car) {
+    park(car, slot) {
         if (!this.isFull()) {
-            this.cars.push(car);
+            this.cars[slot] = car;
             return true;
         }
         if (this.isFull()) {
@@ -20,20 +21,40 @@ class ParkingLot {
         }
     }
 
-    unPark() {
+    unPark(slot) {
+        let object = {
+            name: null,
+            car: null
+        };
+
+        if (this.isEmpty() === this.capacity)
+            return false;
         if (this.isFull()) {
-            this.cars.pop();
+            this.cars[slot] = object;
             return ownerParking.notifyOwner(true);
         }
-        if (this.cars.length > 0) {
-            this.cars.pop();
+        if (!this.isFull()) {
+            this.cars[slot] = object;
             return true;
         }
-        return false
     }
 
     isFull() {
-        return this.cars.length >= this.capacity;
+        let count=0;
+        for (let i=0; i<this.capacity; i++) {
+            if (this.cars[i].car != null )
+                count++;
+        }
+        return count >= this.capacity;
+    }
+
+    isEmpty() {
+        let count = 0;
+        for (let i=0; i<this.capacity; i++) {
+            if (this.cars[i].car === null )
+                count++;
+        }
+        return count;
     }
 
     allocatedSpace() {
@@ -55,16 +76,8 @@ class ParkingLot {
         }
     }
 
-    parkAtSpecificPlace(car, slot) {
-        if (this.cars[slot].car === null) {
-            this.cars[slot] = car;
-            return true;
-        }
-        return false;
-    }
-
-    findCar(type) {
-        let searchSlot = this.cars.find(o => o.car == type );
+    findCar(carNo) {
+        let searchSlot = this.cars.find(o => o.car == carNo );
         return this.cars.indexOf(searchSlot);
     }
 }
