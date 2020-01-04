@@ -57,7 +57,11 @@ class ParkingLot {
     }
 
     parkAtSpecificPlace(car, slot) {
-        this.cars[slot] = car;
+        if (this.cars[slot].type === null){
+            this.cars[slot] = car;
+            return true;
+        }
+        return false;
     }
 }
 

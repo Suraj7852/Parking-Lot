@@ -71,6 +71,12 @@ describe('given slots: ', () => {
     });
 
     it('should park the car where to park', function () {
-        parkingLot.parkAtSpecificPlace({name: "vishal", car: "5689"},4);
+        let specificPlace = parkingLot.parkAtSpecificPlace({name: "vishal", car: "5689"},4);
+        assert.isTrue(specificPlace);
+    });
+
+    it('should return false if car is already parked at that slot', function () {
+        let specificPlace = parkingLot.parkAtSpecificPlace({name: "vishal", car: "5689"},1);
+        assert.isFalse(specificPlace);
     });
 });
