@@ -1,5 +1,6 @@
 let observer = require('./Observer');
 let ownerParking = require('./OwnerParking');
+let carDetails = require('./CarDetails');
 
 class ParkingLot {
     capacity;
@@ -22,19 +23,14 @@ class ParkingLot {
     }
 
     unPark(slot) {
-        let object = {
-            name: null,
-            car: null
-        };
-
         if (this.isEmpty() === this.capacity)
             return false;
         if (this.isFull()) {
-            this.cars[slot] = object;
+            this.cars[slot] = carDetails;
             return ownerParking.notifyOwner(true);
         }
         if (!this.isFull()) {
-            this.cars[slot] = object;
+            this.cars[slot] = carDetails;
             return true;
         }
     }
@@ -58,13 +54,9 @@ class ParkingLot {
     }
 
     allocatedSpace() {
-        let object = {
-            name: null,
-            car: null
-        };
         for (let i = 0; i < this.capacity; i++) {
             if (this.cars[i] === undefined)
-                this.cars.push(object);
+                this.cars.push(carDetails);
         }
         return this.cars;
     }
