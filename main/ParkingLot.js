@@ -11,7 +11,7 @@ class ParkingLot {
     }
 
     park(car) {
-        if (this.findCar(car.car) == -1){
+        if (this.findCar(car.car).slot == -1) {
             if (this.notFull().notFull) {
                 let lotNumber = this.findLotNumber();
                 for (let i = 0; i < this.parkingLots[lotNumber].length; i++) {
@@ -60,6 +60,18 @@ class ParkingLot {
             notFull: count > 0,
             empty: empty == 0
         };
+    }
+
+    handicapParking(car) {
+        for (let i = 0; i < this.parkingLots.length; i++) {
+            let parkingIndex = this.parkingLots[i].find(o => o.car == null);
+            let index = this.parkingLots[i].indexOf(parkingIndex);
+            if (index != -1) {
+                this.parkingLots[i][index] = {name: car.name, car: car.car, time: carDetails.time};
+                return true;
+            }
+        }
+        throw new Error("There is no empty parking space available");
     }
 
     findCar(carNo) {

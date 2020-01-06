@@ -14,10 +14,10 @@ describe('park the car', () => {
         parkingLot.createLots(1);
         parkingLot.park({name: "suraj", car: 4587});
         parkingLot.park({name: "raju", car: 45857});
-        assert.isFalse(parkingLot.park({name: "rani", car: 4587}));
+        assert.isFalse(parkingLot.park({name: "rani", car: 45887}));
     });
 
-it('should throw exception if same car is parked already', () => {
+    it('should throw exception if same car is parked already', () => {
         try {
             let parkingLot = new ParkingLot(2);
             parkingLot.createLots(1);
@@ -65,5 +65,32 @@ describe('creating multiple slot', () => {
         parkingLot.park({name: "uraj", car: 4586});
         let unPark = parkingLot.unPark(4587);
         assert.isTrue(unPark);
+    });
+});
+
+describe('handicap parking', () => {
+    it('should return nearest empty parking slot', () => {
+        let parkingLot = new ParkingLot(2);
+        parkingLot.createLots(2);
+        parkingLot.park({name: "shri", car: 5236});
+        parkingLot.park({name: "akshay", car: 9652});
+        parkingLot.park({name: "suraj", car: 4598});
+        parkingLot.unPark(4598);
+        let handicapParking = parkingLot.handicapParking({name: "mango", car: 1254});
+        assert.isTrue(handicapParking);
+    });
+
+    it('should throw exception when no parking space available', () => {
+        try {
+            let parkingLot = new ParkingLot(2);
+            parkingLot.createLots(2);
+            parkingLot.park({name: "shriniwas", car: 5236});
+            parkingLot.park({name: "akshayP", car: 9652});
+            parkingLot.park({name: "surajNag", car: 4598});
+            parkingLot.park({name: "surajN", car: 4558});
+            parkingLot.handicapParking({name: "mango", car: 1254});
+        } catch (e) {
+            assert.equal(e.message, "There is no empty parking space available")
+        }
     });
 });
