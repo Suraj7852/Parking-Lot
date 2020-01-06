@@ -103,7 +103,21 @@ describe('max free space', () => {
         parkingLot.park({name: "shri", car: 5236});
         parkingLot.park({name: "akshay", car: 9652});
         parkingLot.park({name: "suraj", car: 4598});
-        let handicapParking = parkingLot.notFull();
-        assert.equal(handicapParking.maxFreeSpace, 3);
+        let handicapParking = parkingLot.largeVehicle({name: "suraj", car: 4598});
+        assert.isTrue(handicapParking)
+    });
+
+    it('should return lot number with max parking space', () => {
+        try{
+            let parkingLot = new ParkingLot(2);
+            parkingLot.createLots(2);
+            parkingLot.park({name: "shri", car: 5236});
+            parkingLot.park({name: "akshay", car: 9652});
+            parkingLot.park({name: "akshay1", car: 2652});
+            parkingLot.park({name: "suraj", car: 4598});
+            parkingLot.largeVehicle({name: "suraj", car: 4598});
+        } catch (e) {
+            assert.equal(e.message,"slots are full")
+        }
     });
 });

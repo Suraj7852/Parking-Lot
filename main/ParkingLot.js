@@ -69,6 +69,17 @@ class ParkingLot {
         };
     }
 
+    largeVehicle(car) {
+        if (this.notFull().notFull){
+            let lot = this.notFull().maxFreeSpace;
+            let parkingIndex = this.parkingLots[lot].find(o => o.car == null);
+            let index = this.parkingLots[lot].indexOf(parkingIndex);
+            this.parkingLots[lot][index] = car;
+            return true;
+        }
+        throw new Error("slots are full");
+    }
+
     handicapParking(car) {
         for (let i = 0; i < this.parkingLots.length; i++) {
             let parkingIndex = this.parkingLots[i].find(o => o.car == null);
