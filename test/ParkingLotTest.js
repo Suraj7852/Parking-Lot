@@ -16,6 +16,17 @@ describe('park the car', () => {
         parkingLot.park({name: "raju", car: 45857});
         assert.isFalse(parkingLot.park({name: "rani", car: 4587}));
     });
+
+it('should throw exception if same car is parked already', () => {
+        try {
+            let parkingLot = new ParkingLot(2);
+            parkingLot.createLots(1);
+            parkingLot.park({name: "suraj", car: 4587});
+            parkingLot.park({name: "raju", car: 4587});
+        } catch (e) {
+            assert.equal(e.message, "this number of car already exists");
+        }
+    });
 });
 
 describe('unPark the car', () => {

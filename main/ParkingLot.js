@@ -11,20 +11,23 @@ class ParkingLot {
     }
 
     park(car) {
-        if (this.notFull().notFull) {
-            let lotNumber = this.findLotNumber();
-            for (let i = 0; i < this.parkingLots[lotNumber].length; i++) {
-                if (this.parkingLots[lotNumber][i].name == null) {
-                    this.parkingLots[lotNumber][i] = {name: car.name, car: car.car, time: carDetails.time};
-                    break;
+        if (this.findCar(car.car) == -1){
+            if (this.notFull().notFull) {
+                let lotNumber = this.findLotNumber();
+                for (let i = 0; i < this.parkingLots[lotNumber].length; i++) {
+                    if (this.parkingLots[lotNumber][i].name == null) {
+                        this.parkingLots[lotNumber][i] = {name: car.name, car: car.car, time: carDetails.time};
+                        break;
+                    }
                 }
+                return true;
             }
-            return true;
+            if (!this.notFull().notFull) {
+                observer.notifyAll();
+                return false;
+            }
         }
-        if (!this.notFull().notFull) {
-            observer.notifyAll();
-            return false;
-        }
+        throw new Error("this number of car already exists");
     }
 
     unPark(carNo) {
@@ -53,7 +56,6 @@ class ParkingLot {
                     empty++;
             }
         }
-        // console.log(count>0)
         return {
             notFull: count > 0,
             empty: empty == 0
@@ -106,4 +108,5 @@ class ParkingLot {
         return lotnumber;
     }
 }
+
 module.exports = ParkingLot;
