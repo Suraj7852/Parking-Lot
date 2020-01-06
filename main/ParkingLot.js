@@ -4,75 +4,106 @@ let carDetails = require('./CarDetails');
 
 class ParkingLot {
     capacity;
-    cars = [];
+    parkingLots;
 
     constructor(capacity) {
         this.capacity = capacity;
-        this.allocatedSpace();
     }
 
-    park(car, slot) {
-        if (!this.isFull()) {
-            this.cars[slot] = car;
+    park(car) {
+        if (this.notFull().notFull) {
+            let lotNumber = this.findLotNumber();
+            for (let i = 0; i < this.parkingLots[lotNumber].length; i++) {
+                if (this.parkingLots[lotNumber][i].name == null) {
+                    this.parkingLots[lotNumber][i] = {name: car.name, car: car.car, time: carDetails.time};
+                    break;
+                }
+            }
             return true;
         }
-        if (this.isFull()) {
+        if (!this.notFull().notFull) {
             observer.notifyAll();
             return false;
         }
     }
 
-    unPark(slot) {
-        if (this.isEmpty() === this.capacity)
+    unPark(carNo) {
+        let carUnPark = this.findCar(carNo);
+        if (this.notFull().empty) {
             return false;
-        if (this.isFull()) {
-            this.cars[slot] = carDetails;
+        }
+        if (!this.notFull().notFull) {
+            this.parkingLots[carUnPark.lotNumber][carUnPark.slot] = carDetails;
             return ownerParking.notifyOwner(true);
         }
-        if (!this.isFull()) {
-            this.cars[slot] = carDetails;
+        if (this.notFull().notFull) {
+            this.parkingLots[carUnPark.lotNumber][carUnPark.slot] = carDetails;
             return true;
         }
     }
 
-    isFull() {
-        let count=0;
-        for (let i=0; i<this.capacity; i++) {
-            if (this.cars[i].car != null )
-                count++;
-        }
-        return count >= this.capacity;
-    }
-
-    isEmpty() {
+    notFull() {
         let count = 0;
-        for (let i=0; i<this.capacity; i++) {
-            if (this.cars[i].car === null )
-                count++;
+        let empty = 0;
+        for (let i = 0; i < this.parkingLots.length; i++) {
+            for (let j = 0; j < this.capacity; j++) {
+                if (this.parkingLots[i][j].name == null)
+                    count++;
+                if (this.parkingLots[i][j].name != null)
+                    empty++;
+            }
         }
-        return count;
-    }
-
-    allocatedSpace() {
-        for (let i = 0; i < this.capacity; i++) {
-            if (this.cars[i] === undefined)
-                this.cars.push(carDetails);
-        }
-        return this.cars;
-    }
-
-    unAllocatedSpace() {
-        for (let i = 0; i < this.capacity; i++) {
-            if (this.cars[i].car === null)
-                console.log("Empty slots: " + i);
-        }
-        return true;
+        // console.log(count>0)
+        return {
+            notFull: count > 0,
+            empty: empty == 0
+        };
     }
 
     findCar(carNo) {
-        let searchSlot = this.cars.find(o => o.car == carNo );
-        return this.cars.indexOf(searchSlot);
+        let searchSlot;
+        let count = 0;
+        for (let i = 0; i < this.parkingLots.length; i++) {
+            if (this.parkingLots[i].find(o => o.car == carNo)) {
+                count = i;
+                searchSlot = this.parkingLots[i].find(o => o.car == carNo);
+            }
+        }
+        let search = this.parkingLots[count].indexOf(searchSlot);
+        return {
+            lotNumber: count,
+            slot: search
+        };
+    }
+
+    createLots(numberLot) {
+        this.parkingLots = [];
+        for (let i = 0; i < numberLot; i++) {
+            this.parkingLots[i] = new Array();
+            for (let j = 0; j < this.capacity; j++) {
+                this.parkingLots[i][j] = carDetails;
+
+            }
+        }
+    }
+
+    findLotNumber() {
+        let slotCountArray = [];
+        for (let i = 0; i < this.parkingLots.length; i++) {
+            let count = 0;
+            for (let j = 0; j < this.parkingLots[i].length; j++) {
+                if (this.parkingLots[i][j].name == null)
+                    count++;
+            }
+            slotCountArray[i] = count;
+        }
+        let max = slotCountArray[0];
+        let lotnumber = 0;
+        for (let i = 0; i < slotCountArray.length; i++) {
+            if (slotCountArray[i] > max)
+                lotnumber = i;
+        }
+        return lotnumber;
     }
 }
-
 module.exports = ParkingLot;
