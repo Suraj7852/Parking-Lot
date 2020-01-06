@@ -6,7 +6,6 @@ describe('Lot is full', () => {
     it('should return true if lot is full', function () {
         let parkingLot = new ParkingLot(2);
         parkingLot.createLots(1)
-        parkingLot.park({name: "suraj",car: "1234"});
         let full = parkingLot.park({name: "suraj",car: "1234"});
         let parkingOwner = ownerParking.isFull(full);
         assert.isTrue(parkingOwner)

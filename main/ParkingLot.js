@@ -48,6 +48,8 @@ class ParkingLot {
     notFull() {
         let count = 0;
         let empty = 0;
+        let max = 0;
+        let lotNumber = 0;
         for (let i = 0; i < this.parkingLots.length; i++) {
             for (let j = 0; j < this.capacity; j++) {
                 if (this.parkingLots[i][j].name == null)
@@ -55,10 +57,15 @@ class ParkingLot {
                 if (this.parkingLots[i][j].name != null)
                     empty++;
             }
+            if (count > max) {
+                max = count;
+                lotNumber = i;
+            }
         }
         return {
             notFull: count > 0,
-            empty: empty == 0
+            empty: empty == 0,
+            maxFreeSpace: lotNumber
         };
     }
 

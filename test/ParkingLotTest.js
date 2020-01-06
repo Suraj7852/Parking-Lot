@@ -94,3 +94,16 @@ describe('handicap parking', () => {
         }
     });
 });
+
+
+describe('max free space', () => {
+    it('should return lot number with max parking space', () => {
+        let parkingLot = new ParkingLot(4);
+        parkingLot.createLots(4);
+        parkingLot.park({name: "shri", car: 5236});
+        parkingLot.park({name: "akshay", car: 9652});
+        parkingLot.park({name: "suraj", car: 4598});
+        let handicapParking = parkingLot.notFull();
+        assert.equal(handicapParking.maxFreeSpace, 3);
+    });
+});
