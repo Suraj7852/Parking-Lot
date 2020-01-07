@@ -5,6 +5,7 @@ const CarDetails = {
     name: null,
     car: null,
     color: null,
-    time: hours+" "+minutes+" "+seconds
+    brand: null,
+    time: hours + " " + minutes + " " + seconds
 };
 module.exports = CarDetails;

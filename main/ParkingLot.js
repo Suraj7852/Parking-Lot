@@ -20,6 +20,7 @@ class ParkingLot {
                             name: car.name,
                             car: car.car,
                             color: car.color,
+                            brand: car.brand,
                             time: carDetails.time
                         };
                         break;
@@ -124,9 +125,13 @@ class ParkingLot {
         }
     }
 
-    specificCars() {
+    specificCars(color) {
+        let specificCar = [];
         for (let i = 0; i < this.parkingLots.length; i++) {
-            return  this.parkingLots[i].filter(o => o.color == "white")
+            specificCar[i] = this.parkingLots[i].filter(o => o.color == color);
+        }
+        if (specificCar.length > 0) {
+            return specificCar;
         }
         throw new Error("car with specific color not not found");
     }
