@@ -125,12 +125,20 @@ class ParkingLot {
         }
     }
 
-    specificCars(color, brand) {
+    specificCars(details) {
         let specificCar = [];
-        let count=0;
+        let count = 0;
         for (let i = 0; i < this.parkingLots.length; i++) {
-            specificCar[i] = this.parkingLots[i].filter(o => o.color == color).filter((k => k.brand == brand));
-            if (specificCar[i].length >0 )
+            if (details.color != null && details.brand != null) {
+                specificCar[i] = this.parkingLots[i].filter(o => o.color == details.color).filter(k => k.brand == details.brand);
+            }
+            if (details.brand != null && details.color == null) {
+                specificCar[i] = this.parkingLots[i].filter(k => k.brand == details.brand);
+            }
+            if (details.color != null && details.brand == null) {
+                specificCar[i] = this.parkingLots[i].filter(k => k.color == details.color);
+            }
+            if (specificCar[i].length > 0)
                 count++;
         }
         if (count > 0) {
