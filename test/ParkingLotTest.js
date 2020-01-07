@@ -108,7 +108,7 @@ describe('max free space', () => {
     });
 
     it('should return lot number with max parking space', () => {
-        try{
+        try {
             let parkingLot = new ParkingLot(2);
             parkingLot.createLots(2);
             parkingLot.park({name: "shri", car: 5236});
@@ -117,7 +117,31 @@ describe('max free space', () => {
             parkingLot.park({name: "suraj", car: 4598});
             parkingLot.largeVehicle({name: "suraj", car: 4598});
         } catch (e) {
-            assert.equal(e.message,"slots are full")
+            assert.equal(e.message, "slots are full")
+        }
+    });
+});
+
+describe('police Department', () => {
+    it('should return array with specific color of car', () => {
+        let parkingLot = new ParkingLot(2);
+        parkingLot.createLots(2);
+        parkingLot.park({name: "shri", car: 5236, color: "white"});
+        parkingLot.park({name: "akshay", car: 9652, color: "white"});
+        parkingLot.park({name: "suraj", car: 4598, color: "red"});
+        assert.isArray(parkingLot.specificCars());
+    });
+
+    it('should throw exception when no such car found', () => {
+        try {
+            let parkingLot = new ParkingLot(2);
+            parkingLot.createLots(2);
+            parkingLot.park({name: "shri", car: 5236, color: "black"});
+            parkingLot.park({name: "akshay", car: 9652, color: "blue"});
+            parkingLot.park({name: "suraj", car: 4598, color: "red"});
+            parkingLot.specificCars();
+        } catch (e) {
+            assert.equal(e.message, "car with specific color not not found");
         }
     });
 });

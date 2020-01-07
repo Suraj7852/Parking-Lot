@@ -16,7 +16,12 @@ class ParkingLot {
                 let lotNumber = this.findLotNumber();
                 for (let i = 0; i < this.parkingLots[lotNumber].length; i++) {
                     if (this.parkingLots[lotNumber][i].name == null) {
-                        this.parkingLots[lotNumber][i] = {name: car.name, car: car.car, time: carDetails.time};
+                        this.parkingLots[lotNumber][i] = {
+                            name: car.name,
+                            car: car.car,
+                            color: car.color,
+                            time: carDetails.time
+                        };
                         break;
                     }
                 }
@@ -70,7 +75,7 @@ class ParkingLot {
     }
 
     largeVehicle(car) {
-        if (this.notFull().notFull){
+        if (this.notFull().notFull) {
             let lot = this.notFull().maxFreeSpace;
             let parkingIndex = this.parkingLots[lot].find(o => o.car == null);
             let index = this.parkingLots[lot].indexOf(parkingIndex);
@@ -85,7 +90,7 @@ class ParkingLot {
             let parkingIndex = this.parkingLots[i].find(o => o.car == null);
             let index = this.parkingLots[i].indexOf(parkingIndex);
             if (index != -1) {
-                this.parkingLots[i][index] = {name: car.name, car: car.car, time: carDetails.time};
+                this.parkingLots[i][index] = {name: car.name, car: car.car, color: car.color, time: carDetails.time};
                 return true;
             }
         }
@@ -117,6 +122,13 @@ class ParkingLot {
 
             }
         }
+    }
+
+    specificCars() {
+        for (let i = 0; i < this.parkingLots.length; i++) {
+            return  this.parkingLots[i].filter(o => o.color == "white")
+        }
+        throw new Error("car with specific color not not found");
     }
 
     findLotNumber() {

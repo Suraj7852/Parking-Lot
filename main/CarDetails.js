@@ -4,6 +4,7 @@ let seconds = new Date().getSeconds();
 const CarDetails = {
     name: null,
     car: null,
+    color: null,
     time: hours+" "+minutes+" "+seconds
 };
 module.exports = CarDetails;
