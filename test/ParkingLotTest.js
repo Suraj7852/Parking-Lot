@@ -139,7 +139,31 @@ describe('police Department', () => {
             parkingLot.park({name: "shri", car: 5236, color: "black"});
             parkingLot.park({name: "akshay", car: 9652, color: "blue"});
             parkingLot.park({name: "suraj", car: 4598, color: "red"});
-            parkingLot.specificCars();
+            parkingLot.specificCars("blue", "toyota");
+        } catch (e) {
+            assert.equal(e.message, "car with specific color not not found");
+        }
+    });
+});
+
+describe('police Department search car by color with brand', () => {
+    it('should return array with specific color and brand of car', () => {
+        let parkingLot = new ParkingLot(2);
+        parkingLot.createLots(2);
+        parkingLot.park({name: "shri", car: 5236, color: "blue", brand: "toyota"});
+        parkingLot.park({name: "akshay", car: 9652, color: "blue", brand: "toyota"});
+        parkingLot.park({name: "suraj", car: 4598, color: "blue", brand: "maruti"});
+        assert.isArray(parkingLot.specificCars("blue", "toyota"));
+    });
+
+    it('should throw exception when no such car found', () => {
+        try {
+            let parkingLot = new ParkingLot(2);
+            parkingLot.createLots(2);
+            parkingLot.park({name: "shri", car: 5236, color: "black", brand: "toyota"});
+            parkingLot.park({name: "akshay", car: 9652, color: "blue", brand: "maruti"});
+            parkingLot.park({name: "suraj", car: 4598, color: "red", brand: "toyota"});
+            parkingLot.specificCars("blue", "toyota");
         } catch (e) {
             assert.equal(e.message, "car with specific color not not found");
         }

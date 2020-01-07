@@ -125,12 +125,16 @@ class ParkingLot {
         }
     }
 
-    specificCars(color) {
+    specificCars(color, brand) {
         let specificCar = [];
+        let count=0;
         for (let i = 0; i < this.parkingLots.length; i++) {
-            specificCar[i] = this.parkingLots[i].filter(o => o.color == color);
+            specificCar[i] = this.parkingLots[i].filter(o => o.color == color).filter((k => k.brand == brand));
+            if (specificCar[i].length >0 )
+                count++;
         }
-        if (specificCar.length > 0) {
+        if (count > 0) {
+            console.log(specificCar)
             return specificCar;
         }
         throw new Error("car with specific color not not found");
