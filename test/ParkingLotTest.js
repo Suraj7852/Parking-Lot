@@ -27,6 +27,26 @@ describe('park the car', () => {
             assert.equal(e.message, "this number of car already exists");
         }
     });
+
+    it('should throw exception if empty car name passed', () => {
+        try {
+            let parkingLot = new ParkingLot(2);
+            parkingLot.createLots(1);
+            parkingLot.park({name: "", car: 4587});
+        } catch (e) {
+            assert.equal(e.message, "Invalid enteries!");
+        }
+    });
+
+    it('should throw exception if empty car details passed', () => {
+        try {
+            let parkingLot = new ParkingLot(2);
+            parkingLot.createLots(1);
+            parkingLot.park({});
+        } catch (e) {
+            assert.equal(e.message, "Invalid enteries!");
+        }
+    });
 });
 
 describe('unPark the car', () => {
@@ -204,5 +224,20 @@ describe('police Department search car by time', () => {
         } catch (e) {
             assert.equal(e.message, "No such car found")
         }
+    });
+});
+
+describe('test', () => {
+    it('should rye', () => {
+        // let parkingLot = new ParkingLot(2);
+        // parkingLot.createLots(2);
+        // parkingLot.park({name: "suraj", car: 7849, color: "blue", brand: "honda", time: new Date(`1/8/2020 15:00`)});
+        // parkingLot.park({name: "shri", car: 5236, color: "white", brand: "bmw", time: new Date(`1/8/2020 15:14`)});
+        // parkingLot.park({name: "akshay", car: 8236, color: "white", brand: "bmw", time: new Date(`1/8/2020 15:25`)});
+        // parkingLot.park({name: "vishal", car: 5126, color: "red", brand: "audi", time: new Date(`1/8/2020 15:00`)});
+        // assert.isArray(parkingLot.parkingTimeHistory(30));
+        let object = {name:""};
+        if (Object.keys(object).length == 0 || object.name.length == 0)
+            console.log("SURAJ")
     });
 });

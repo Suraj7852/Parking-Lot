@@ -11,6 +11,10 @@ class ParkingLot {
     }
 
     park(car) {
+        if (Object.keys(car).length == 0 || car.name.length == 0) {
+            throw new Error("Invalid enteries!")
+        }
+
         if (this.findCar(car.car).slot == -1) {
             if (this.notFull().notFull) {
                 let lotNumber = this.findLotNumber();
