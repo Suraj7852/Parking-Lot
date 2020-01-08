@@ -21,7 +21,7 @@ class ParkingLot {
                             car: car.car,
                             color: car.color,
                             brand: car.brand,
-                            time: carDetails.time
+                            time: car.time
                         };
                         break;
                     }
@@ -142,10 +142,31 @@ class ParkingLot {
                 count++;
         }
         if (count > 0) {
-            console.log(specificCar)
             return specificCar;
         }
         throw new Error("car with specific color not not found");
+    }
+
+    parkingTimeHistory(timeDiff) {
+        let slotDetails = [];
+        let timeDifference = 0;
+        let count = 0;
+        let date = new Date();
+        for (let i = 0; i < this.parkingLots.length; i++) {
+            for (let j = 0; j < this.capacity; j++) {
+                let time = this.parkingLots[i][j].time;
+                let diffMs = (time - date);
+                timeDifference = (Math.round(((diffMs % 86400000) % 3600000) / 60000) + 1) * -1;
+                if (timeDifference > timeDiff) {
+                    slotDetails[i] = this.parkingLots[i][j];
+                    count++;
+                }
+            }
+        }
+        if (count == 0) {
+            throw new Error("No such car found");
+        }
+        return slotDetails;
     }
 
     findLotNumber() {

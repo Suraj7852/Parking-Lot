@@ -1,11 +1,9 @@
-let hours = new Date().getHours();
-let minutes = new Date().getMinutes();
-let seconds = new Date().getSeconds();
+let time = new Date();
 const CarDetails = {
     name: null,
     car: null,
     color: null,
     brand: null,
-    time: hours + " " + minutes + " " + seconds
+    time: time.getTime()
 };
 module.exports = CarDetails;
